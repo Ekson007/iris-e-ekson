@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Íris & Ekson</title>
+  <meta name="theme-color" content="#17123a">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%2317123a'/%3E%3Cpath d='M32 10c8 8 8 18 0 26-8-8-8-18 0-26zm-17 17c10-2 17 3 19 12-10 2-17-3-19-12zm34 0c-2 9-9 14-19 12 2-9 9-14 19-12z' fill='%23b9a6f5'/%3E%3Ccircle cx='32' cy='38' r='4' fill='%23f0b544'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Figtree:wght@400;500;600;700&family=Gloock&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="travado">
+
+  <!-- ============ ABERTURA: ENVELOPE ============ -->
+  <div id="abertura" class="abertura">
+    <div class="abertura-conteudo">
+      <p class="abertura-dica" id="dica"></p>
+      <button class="envelope" id="envelope" type="button" aria-label="Abrir o envelope">
+        <span class="env-corpo"></span>
+        <span class="env-carta"><span class="env-carta-txt" id="envFrase"></span></span>
+        <span class="env-frente"></span>
+        <span class="env-aba"></span>
+        <span class="env-selo"><span id="envMonograma"></span></span>
+      </button>
+      <button class="btn btn-ouro" id="btnAbrir" type="button"></button>
+    </div>
+  </div>
+
+  <!-- ============ SITE ============ -->
+  <main id="site" hidden>
+
+    <nav class="topo" id="topo" aria-label="Seções">
+      <a href="#tempo">Nossa história</a>
+      <a href="#galeria">Fotos</a>
+      <a href="#cartas">Cartas</a>
+      <a href="#motivos">Motivos</a>
+      <a href="#quiz">Quiz</a>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero escuro" id="inicio">
+      <canvas id="petalas" aria-hidden="true"></canvas>
+      <div class="hero-miolo">
+        <h1 class="hero-nomes">
+          <span id="nomeEla"></span>
+          <span class="hero-e" aria-hidden="true">&amp;</span>
+          <span id="nomeEle"></span>
+        </h1>
+        <p class="hero-frase" id="heroFrase"></p>
+
+        <div class="contador" id="contador" role="timer" aria-live="off">
+          <div class="cont-grande">
+            <div class="cont-item"><span class="cont-num" id="cAnos">0</span><span class="cont-rot" id="cAnosR">anos</span></div>
+            <div class="cont-item"><span class="cont-num" id="cMeses">0</span><span class="cont-rot" id="cMesesR">meses</span></div>
+            <div class="cont-item"><span class="cont-num" id="cDias">0</span><span class="cont-rot" id="cDiasR">dias</span></div>
+          </div>
+          <div class="cont-pequeno">
+            <span><b id="cHoras">0</b> <i id="cHorasR">horas</i></span>
+            <span><b id="cMin">0</b> <i id="cMinR">minutos</i></span>
+            <span><b id="cSeg">0</b> <i id="cSegR">segundos</i></span>
+          </div>
+          <p class="cont-total" id="contTotal"></p>
+        </div>
+
+        <div class="marco" id="marco"></div>
+
+        <a class="descer" href="#tempo" aria-label="Descer para a nossa história"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></a>
+      </div>
+    </header>
+
+    <!-- LINHA DO TEMPO -->
+    <section class="secao claro" id="tempo">
+      <div class="secao-cab">
+        <h2>Nossa história</h2>
+        <p>Em cada momento, toque nos botões para ver a foto e ler o que eu escrevi.</p>
+      </div>
+      <ol class="linha" id="linha"></ol>
+    </section>
+
+    <!-- GALERIA -->
+    <section class="secao lavanda" id="galeria">
+      <div class="secao-cab">
+        <h2>Nossas fotos</h2>
+        <p>Toque em uma foto para ampliar e use as setas para passar.</p>
+      </div>
+      <div class="galeria" id="galeriaGrade"></div>
+      <div class="trilha" id="trilha" hidden>
+        <h3>Nossa trilha sonora</h3>
+        <div class="trilha-player" id="trilhaPlayer"></div>
+      </div>
+    </section>
+
+    <!-- CARTAS -->
+    <section class="secao escuro" id="cartas">
+      <div class="secao-cab">
+        <h2>Cartas para abrir</h2>
+        <p>Cada uma é para um momento. Algumas só abrem na hora certa.</p>
+      </div>
+      <div class="cartas" id="cartasGrade"></div>
+    </section>
+
+    <!-- MOTIVOS -->
+    <section class="secao claro" id="motivos">
+      <div class="secao-cab">
+        <h2>Motivos para amar você</h2>
+        <p>Tem muitos. Toque no botão para sortear um.</p>
+      </div>
+      <div class="motivo-palco">
+        <div class="motivo-cartao" id="motivoCartao" aria-live="polite">
+          <span class="motivo-vazio">Qual será o primeiro?</span>
+        </div>
+        <div class="motivo-rodape">
+          <button class="btn btn-iris" id="btnMotivo" type="button">Sortear um motivo</button>
+          <span class="motivo-cont" id="motivoCont"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section class="secao lavanda" id="quiz">
+      <div class="secao-cab">
+        <h2>Será que você me conhece?</h2>
+        <p>Cinco perguntas sobre nós dois.</p>
+      </div>
+      <div class="quiz" id="quizBox"></div>
+    </section>
+
+    <!-- PERGUNTA FINAL -->
+    <section class="secao escuro final" id="final">
+      <div class="final-palco" id="finalPalco">
+        <h2 id="finalPergunta"></h2>
+        <div class="final-botoes" id="finalBotoes">
+          <button class="btn btn-ouro" id="btnSim" type="button"></button>
+          <button class="btn btn-fantasma" id="btnNao" type="button"></button>
+        </div>
+      </div>
+      <div class="final-resposta" id="finalResposta" hidden>
+        <h2 id="finalTitulo"></h2>
+        <div class="final-msg" id="finalMsg"></div>
+        <a class="btn btn-ouro" id="finalZap" target="_blank" rel="noopener" hidden>Responder pelo WhatsApp</a>
+      </div>
+    </section>
+
+    <footer class="rodape escuro">
+      <button class="rodape-coracao" id="segredo" type="button" aria-label="Um coração escondido">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 2.7 4.5 6.4 4.5c2.1 0 3.8 1.2 5.6 3.4 1.8-2.2 3.5-3.4 5.6-3.4 3.7 0 5.5 3.9 4 7.3C19.5 16.4 12 21 12 21z"/></svg>
+      </button>
+      <p id="rodapeTxt"></p>
+    </footer>
+  </main>
+
+  <!-- DOCK: música + frase rápida -->
+  <div class="dock" id="dock" hidden>
+    <div class="player" id="player">
+      <button class="player-btn" id="pPlay" type="button" aria-label="Tocar ou pausar a música"></button>
+      <div class="player-info">
+        <span class="player-titulo" id="pTitulo">Música</span>
+        <span class="player-sub" id="pSub"></span>
+      </div>
+      <button class="player-btn pequeno" id="pProx" type="button" aria-label="Próxima música"></button>
+    </div>
+    <button class="fab" id="fab" type="button" aria-label="Receber uma frase de carinho">
+      <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 2.7 4.5 6.4 4.5c2.1 0 3.8 1.2 5.6 3.4 1.8-2.2 3.5-3.4 5.6-3.4 3.7 0 5.5 3.9 4 7.3C19.5 16.4 12 21 12 21z"/></svg>
+    </button>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <audio id="audio" preload="none"></audio>
+  <canvas id="fx" aria-hidden="true"></canvas>
+
+  <!-- Janela para fotos e mensagens -->
+  <dialog id="modal" aria-label="Janela">
+    <div class="modal-caixa" id="modalCaixa"></div>
+  </dialog>
+
+  <noscript><p style="padding:2rem;font-family:sans-serif">Este site precisa de JavaScript ativado para funcionar.</p></noscript>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
